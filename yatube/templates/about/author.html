@@ -1,0 +1,50 @@
+{% extends "base.html" %}
+
+{% block title %}Об авторе проекта{% endblock %}
+
+{% block content %}
+  <div class="container py-5">
+    <h1>Привет, я автор</h1>
+    <p>
+      Привет, меня зовут Илья и мне 30 лет.<br>
+      Уверен, вам не сильно интересно читать мои автобиографию, поэтому предлагаю спланировать поездку в Париж.
+    </p>
+    <ul>
+      <li>
+        <details>
+          <summary>Прежде чем лететь в Париж, давайте посмотрим прогноз погоды.</summary>
+          <a class="weatherwidget-io" href="https://forecast7.com/ru/48d862d35/paris/" data-label_1="Париж" data-theme="original" >Париж</a>
+          <script>
+          !function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src='https://weatherwidget.io/js/widget.min.js';fjs.parentNode.insertBefore(js,fjs);}}(document,'script','weatherwidget-io-js');
+          </script>
+        </details>
+      </li>
+      <li>
+        <details>
+          <summary>Теперь давайте определимся, сколько денег нужно на поездку. В этом нам поможет актуальный курс валют.</summary>
+          <div style="font-size:16px; font-family: sans-serif,Arial, Helvetica;width:298px; line-height:24px;border:1px solid #2D6AB4;background-color:#FFFFFF;margin:0px auto;">
+            <div style="background-color:#2d6ab4;height:2.2rem;color:#fff;font-weight:700;text-align:left;padding:6px 0 0 6px;max-width:100%">
+              <i style="background-size:contain;background-position:50%;background-repeat:no-repeat;position:relative;display:inline-block;width:1.33333333em;line-height:1em;padding:0 8px 0 0;font-size:18px;background-image:url(https://w.fxexchangerate.com/static/flags/rub.webp)">&nbsp;
+              </i>
+              <a rel="nofollow" style="color:#fff;padding-left:5px;text-decoration:none" href="https://rub.fxexchangerate.com">Russian Rouble  
+              </a>
+            </div>
+              <script type="text/javascript" src="https://w.fxexchangerate.com/converter.php?fm=RUB&ft=USD,EUR,GBP,JPY,CHF,&lg=en&am=1000&ty=2">
+              </script>
+            </div>
+        </details>
+      </li>
+      <li>
+        <details>
+          <summary>Почти готово. Осталось только следить за местным временем, чтобы никуда не опоздать.</summary>
+          <a id="time_is_link" rel="nofollow" style="font-size:36px">Time in Paris:</a>
+          <span id="Paris_z71f" style="font-size:36px"></span>
+          <script src="//widget.time.is/pt_br.js"></script>
+          <script>
+          time_is_widget.init({Paris_z71f:{template:"TIME<br>DATE", date_format:"daynum.mnum.year"}});
+          </script>        
+        </details>
+      </li>
+     </ul>
+  </div>
+{% endblock %}
