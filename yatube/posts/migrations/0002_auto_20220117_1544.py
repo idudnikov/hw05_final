@@ -14,7 +14,10 @@ class Migration(migrations.Migration):
     operations = [
         migrations.AlterModelOptions(
             name="group",
-            options={"verbose_name": "Группа", "verbose_name_plural": "Группы"},
+            options={
+                "verbose_name": "Группа",
+                "verbose_name_plural": "Группы",
+            },
         ),
         migrations.AlterModelOptions(
             name="post",

@@ -241,7 +241,8 @@ class PostViewPaginatorTest(TestCase):
     def test_paginator_profile_page_contains_five_records(self):
         """Проверка паджинатора на странице профиля"""
         response = self.author_client.get(
-            reverse("posts:profile", kwargs={"username": self.user}) + "?page=2"
+            reverse("posts:profile", kwargs={"username": self.user})
+            + "?page=2"
         )
         self.assertEqual(len(response.context["page_obj"]), 5)
 
@@ -281,7 +282,9 @@ class FollowViewTest(TestCase):
         автора и не появляется у тех, кто не подписан на автора"""
         Follow.objects.create(author=self.author, user=self.following_user)
         post = Post.objects.create(author=self.author, text="Test post")
-        response = self.following_user_client.get(reverse("posts:follow_index"))
+        response = self.following_user_client.get(
+            reverse("posts:follow_index")
+        )
         self.assertTrue(post in response.context["page_obj"])
         response = self.user_client.get(reverse("posts:follow_index"))
         self.assertFalse(post in response.context["page_obj"])
