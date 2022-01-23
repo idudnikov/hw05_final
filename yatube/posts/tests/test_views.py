@@ -1,14 +1,23 @@
+import shutil
+import tempfile
+
 from django import forms
+from django.conf import settings
 from django.contrib.auth import get_user_model
+from django.core.cache import cache
 from django.core.files.uploadedfile import SimpleUploadedFile
 from django.test import Client, TestCase
+from django.test.utils import override_settings
 from django.urls import reverse
 
 from ..models import Follow, Group, Post
 
 User = get_user_model()
 
+TEMP_MEDIA_ROOT = tempfile.mkdtemp(dir=settings.BASE_DIR)
 
+
+@override_settings(MEDIA_ROOT=TEMP_MEDIA_ROOT)
 class PostViewTest(TestCase):
     @classmethod
     def setUpClass(cls):
@@ -36,7 +45,13 @@ class PostViewTest(TestCase):
             image=uploaded,
         )
 
+    @classmethod
+    def tearDownClass(cls):
+        shutil.rmtree(TEMP_MEDIA_ROOT, ignore_errors=True)
+        super().tearDownClass()
+
     def setUp(self):
+        cache.clear()
         self.author_client = Client()
         self.author_client.force_login(self.user)
 

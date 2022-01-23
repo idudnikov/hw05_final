@@ -1,4 +1,5 @@
 from django.contrib.auth import get_user_model
+from django.core.cache import cache
 from django.test import Client, TestCase
 from django.urls import reverse
 
@@ -30,5 +31,7 @@ class PostCacheTest(TestCase):
         self.assertEqual(first_response.context["page_obj"][0], new_post)
         Post.objects.filter(pk=new_post.id).delete()
         second_response = self.author_client.get(reverse("posts:index"))
-        self.assertFalse(Post.objects.filter(pk=new_post.id).exists())
         self.assertEqual(first_response.content, second_response.content)
+        cache.clear()
+        third_response = self.author_client.get(reverse("posts:index"))
+        self.assertNotEqual(new_post, third_response.context["page_obj"][0])
